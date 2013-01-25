@@ -1,4 +1,4 @@
-package com.jnh.pagemarkers.api;
+package com.jnh.pagemarkers.api.admin;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping(value = "/admin")
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -28,4 +29,6 @@ public class AdminController {
 		
 		return "home";
 	}
+	
+	
 }

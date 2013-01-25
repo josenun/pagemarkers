@@ -116,6 +116,22 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- Jackson JSON -->
+    <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.8.3</version>
+    </dependency>
+    <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.8.3</version>
+    </dependency>
+    <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.8.3</version>
+    </dependency>
   </dependencies>
   <build>
       <pluginManagement>

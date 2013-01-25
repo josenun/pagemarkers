@@ -1,3 +1,11 @@
+# SVN files
+*/.svn
+**/.svn
+**/.svn/*
+**/.svn/**
+**/.svn/**/*
+*/.svn/**
+*/.svn/**/*
 # Eclipse files
 .settings
 .classpath
