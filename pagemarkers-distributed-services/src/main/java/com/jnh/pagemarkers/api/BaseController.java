@@ -25,8 +25,8 @@ import com.jnh.pagemarkers.api.exceptions.ParameterNotFoundException;
  */
 @Controller
 public class BaseController {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(BaseController.class);
 
     /**
      * Null constructor. Security AOP reason.
@@ -37,11 +37,12 @@ public class BaseController {
     /**
      * @param ex
      * @param response
-     * @return
+     * @return GenericResponse
      */
     @ExceptionHandler(value = { MethodArgumentNotValidException.class })
     @ResponseBody
-    public GenericResponse handleException(MethodArgumentNotValidException ex, HttpServletResponse response) {
+    public final GenericResponse handleException(
+            MethodArgumentNotValidException ex, HttpServletResponse response) {
         BindingResult bindingResult = ex.getBindingResult();
         String errorCode = "";
         if (bindingResult.hasErrors()) {
@@ -51,122 +52,138 @@ public class BaseController {
                 errorCode = objectError.getCode();
             }
         }
-//        ErrorDefinition error = errorService.resolvePolicy(ex);
+        // ErrorDefinition error = errorService.resolvePolicy(ex);
         ErrorDefinition error = new ErrorDefinition();
         response.setStatus(Integer.parseInt(error.getHttpStatusCode()));
-        GenericResponse genericResponse = new GenericResponse(error.getErrorId().getId(), error.getErrorId()
-                .getCategory(), error.getName(), errorCode);
+        GenericResponse genericResponse = new GenericResponse(error
+                .getErrorId().getId(), error.getErrorId().getCategory(),
+                error.getName(), errorCode);
 
-        BaseController.LOGGER.error(ex.toString() + ": " + genericResponse.toString());
-        BaseController.LOGGER.debug(ex.toString() + ": " + genericResponse.toString(), ex);
+        BaseController.LOGGER.error(ex.toString() + ": "
+                + genericResponse.toString());
+        BaseController.LOGGER.debug(
+                ex.toString() + ": " + genericResponse.toString(), ex);
 
         return genericResponse;
     }
 
-//    /**
-//     * Handler WalletExternalException.
-//     * 
-//     * @param ex
-//     * @param response
-//     * @return
-//     */
-//    @ExceptionHandler(value = { WalletExternalException.class })
-//    @ResponseBody
-//    public GenericResponse handleException(WalletExternalException ex, HttpServletResponse response) {
-//        ErrorDefinition error = errorService.resolve(ex);
-//        response.setStatus(Integer.parseInt(error.getHttpStatusCode()));
-//        GenericResponse genericResponse = new GenericResponse(error.getErrorId().getId(), error.getErrorId()
-//                .getCategory(), error.getName(), error.getTxt());
-//
-//        BaseController.LOGGER.error(ex.toString());
-//        BaseController.LOGGER.debug(ex.toString() + ": ", ex);
-//
-//        return genericResponse;
-//    }
-//
-//    /**
-//     * Handler SessionId Exceptions.
-//     * 
-//     * @param ex
-//     * @param response
-//     * @return
-//     */
-//    @ExceptionHandler(value = { SessionIdException.class })
-//    @ResponseBody
-//    public GenericResponse handleException(SessionIdException ex, HttpServletResponse response) {
-//        ErrorDefinition error = errorService.resolve(ex.getCategory(), ex.getId());
-//        response.setStatus(Integer.parseInt(error.getHttpStatusCode()));
-//        GenericResponse genericResponse = new GenericResponse(error.getErrorId().getId(), error.getErrorId()
-//                .getCategory(), error.getName(), error.getTxt());
-//
-//        BaseController.LOGGER.error(ex.toString());
-//        BaseController.LOGGER.debug(ex.toString() + ": ", ex);
-//
-//        return genericResponse;
-//    }
-//
+    // /**
+    // * Handler WalletExternalException.
+    // *
+    // * @param ex
+    // * @param response
+    // * @return
+    // */
+    // @ExceptionHandler(value = { WalletExternalException.class })
+    // @ResponseBody
+    // public GenericResponse handleException(WalletExternalException ex,
+    // HttpServletResponse response) {
+    // ErrorDefinition error = errorService.resolve(ex);
+    // response.setStatus(Integer.parseInt(error.getHttpStatusCode()));
+    // GenericResponse genericResponse = new
+    // GenericResponse(error.getErrorId().getId(), error.getErrorId()
+    // .getCategory(), error.getName(), error.getTxt());
+    //
+    // BaseController.LOGGER.error(ex.toString());
+    // BaseController.LOGGER.debug(ex.toString() + ": ", ex);
+    //
+    // return genericResponse;
+    // }
+    //
+    // /**
+    // * Handler SessionId Exceptions.
+    // *
+    // * @param ex
+    // * @param response
+    // * @return
+    // */
+    // @ExceptionHandler(value = { SessionIdException.class })
+    // @ResponseBody
+    // public GenericResponse handleException(SessionIdException ex,
+    // HttpServletResponse response) {
+    // ErrorDefinition error = errorService.resolve(ex.getCategory(),
+    // ex.getId());
+    // response.setStatus(Integer.parseInt(error.getHttpStatusCode()));
+    // GenericResponse genericResponse = new
+    // GenericResponse(error.getErrorId().getId(), error.getErrorId()
+    // .getCategory(), error.getName(), error.getTxt());
+    //
+    // BaseController.LOGGER.error(ex.toString());
+    // BaseController.LOGGER.debug(ex.toString() + ": ", ex);
+    //
+    // return genericResponse;
+    // }
+    //
     /**
      * Handler Wallet Exceptions.
      * 
      * @param ex
      * @param response
-     * @return
+     * @return GenericResponse
      */
     @ExceptionHandler(value = { Exception.class })
     @ResponseBody
-    public GenericResponse handleException(Exception ex, HttpServletResponse response) {
-    	ErrorDefinition error = new ErrorDefinition();
+    public GenericResponse handleException(Exception ex,
+            HttpServletResponse response) {
+        ErrorDefinition error = new ErrorDefinition();
         int status = Integer.parseInt(error.getHttpStatusCode());
         if (status == 401) {
-            response.setHeader("WWW-Authenticate", "Basic realm=\"Wallet Restricted Area\"");
+            response.setHeader("WWW-Authenticate",
+                    "Basic realm=\"Wallet Restricted Area\"");
         }
 
         response.setStatus(status);
-        GenericResponse genericResponse = new GenericResponse(error.getErrorId().getId(), error.getErrorId()
-                .getCategory(), error.getName(), ex.getMessage());
+        GenericResponse genericResponse = new GenericResponse(error
+                .getErrorId().getId(), error.getErrorId().getCategory(),
+                error.getName(), ex.getMessage());
         BaseController.LOGGER.error(ex.toString());
         BaseController.LOGGER.debug(ex.toString() + ": ", ex);
 
         return genericResponse;
     }
-//
-//    /**
-//     * Handler Wallet Throwable Exceptions.
-//     * 
-//     * @param ex
-//     * @param response
-//     * @return
-//     */
-//    @ExceptionHandler(value = { Throwable.class })
-//    @ResponseBody
-//    public GenericResponse handleException(Throwable ex, HttpServletResponse response) {
-//        ErrorDefinition error = errorService.resolve("SVR", "1000");
-//        int status = Integer.parseInt(error.getHttpStatusCode());
-//        if (status == 401) {
-//            response.setHeader("WWW-Authenticate", "Basic realm=\"Wallet Restricted Area\"");
-//        }
-//
-//        response.setStatus(status);
-//        GenericResponse genericResponse = new GenericResponse(error.getErrorId().getId(), error.getErrorId()
-//                .getCategory(), error.getName(), "System ERROR");
-//
-//        BaseController.LOGGER.error(ex.toString() + ": ");
-//
-//        return genericResponse;
-//    }
+
+    //
+    // /**
+    // * Handler Wallet Throwable Exceptions.
+    // *
+    // * @param ex
+    // * @param response
+    // * @return
+    // */
+    // @ExceptionHandler(value = { Throwable.class })
+    // @ResponseBody
+    // public GenericResponse handleException(Throwable ex, HttpServletResponse
+    // response) {
+    // ErrorDefinition error = errorService.resolve("SVR", "1000");
+    // int status = Integer.parseInt(error.getHttpStatusCode());
+    // if (status == 401) {
+    // response.setHeader("WWW-Authenticate",
+    // "Basic realm=\"Wallet Restricted Area\"");
+    // }
+    //
+    // response.setStatus(status);
+    // GenericResponse genericResponse = new
+    // GenericResponse(error.getErrorId().getId(), error.getErrorId()
+    // .getCategory(), error.getName(), "System ERROR");
+    //
+    // BaseController.LOGGER.error(ex.toString() + ": ");
+    //
+    // return genericResponse;
+    // }
 
     /**
      * Check a Json body against a class.
      * 
      * @param body
      * @param requestClass
-     * @return
+     * @return Json class
      * @throws ParameterNotFoundException
      * @throws MethodArgumentNotValidException
      * @throws UnrecognizedPropertyException
      */
-    protected <T> T checkBody(String body, Class<T> requestClass) throws ParameterNotFoundException,
-            MethodArgumentNotValidException, UnrecognizedPropertyException {
+    protected final <T> T checkBody(String body, Class<T> requestClass)
+            throws ParameterNotFoundException, MethodArgumentNotValidException,
+            UnrecognizedPropertyException {
         ObjectMapper mapper = new ObjectMapper();
         T requestBody = null;
         try {
@@ -174,7 +191,7 @@ public class BaseController {
                 throw new ParameterNotFoundException("Missing request body");
             } else {
                 requestBody = mapper.readValue(body, requestClass);
-//                getValidationEngine().validate(requestBody);
+                // getValidationEngine().validate(requestBody);
             }
         } catch (IOException e) {
             throw new ParameterNotFoundException("Missing request body", e);
