@@ -20,7 +20,6 @@ import com.jnh.pagemarkers.api.BaseController;
  * @author José Núñez Herrero.
  * 
  *         Provider Controller API.
- * 
  */
 @Controller
 @RequestMapping(value = "/provider")
@@ -28,6 +27,14 @@ public class ProviderController extends BaseController {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(ProviderController.class);
 
+    /**
+     * Create pagemarker API.
+     * 
+     * @param provider
+     * @param body
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "/{provider}/pagemarkers", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @ResponseBody

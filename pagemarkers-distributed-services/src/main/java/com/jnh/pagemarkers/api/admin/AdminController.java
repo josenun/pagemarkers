@@ -11,12 +11,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * @author José Núñez Herrero.
+ * 
+ *         Administrator controller API.
+ */
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AdminController.class);
 
+    /**
+     * Ping API.
+     * 
+     * @param locale
+     * @param model
+     * @return view
+     */
     @RequestMapping(value = "/ping", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
         LOGGER.info("Welcome home! The client locale is {}.", locale);
