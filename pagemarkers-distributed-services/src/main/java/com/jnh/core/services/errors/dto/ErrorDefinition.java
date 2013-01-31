@@ -1,14 +1,35 @@
 package com.jnh.core.services.errors.dto;
 
+/**
+ * @author José Núñez Herrero
+ * 
+ *         Error definition class.
+ * 
+ */
 public class ErrorDefinition {
     private ErrorId errorId;
     private String name;
     private String txt;
     private String httpStatusCode;
 
+    /**
+     * Constructor.
+     */
     public ErrorDefinition() {
     }
 
+    /**
+     * Constructor.
+     * 
+     * @param errorId
+     *            ErrorId.
+     * @param name
+     *            Name text.
+     * @param txt
+     *            Description Text.
+     * @param httpStatusCode
+     *            HTTP response Code.
+     */
     public ErrorDefinition(ErrorId errorId, String name, String txt,
             String httpStatusCode) {
         this.errorId = errorId;
