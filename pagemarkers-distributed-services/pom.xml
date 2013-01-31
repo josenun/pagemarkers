@@ -14,7 +14,7 @@
   <name>pagemarkers-distributed-services Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
- 	<dependencies>
+ <dependencies>
 	<!-- Spring -->
 	<dependency>
 		<groupId>org.springframework</groupId>
@@ -202,7 +202,7 @@
         </configuration>
       </plugin>
     </plugins>
-    <finalName>pagemarkers-distributed-services</finalName>
+    <finalName>pagemarkers-distributed-services</finalName>    
   </build>
-  <description>																																									</description>
+  <description></description>
 </project>
