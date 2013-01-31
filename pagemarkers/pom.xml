@@ -27,6 +27,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>com.jnh</groupId>
+        <artifactId>core</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
    
    <build>
@@ -122,4 +127,13 @@
   <modules>
   	<module>../pagemarkers-distributed-services</module>
   </modules>
+  <dependencyManagement>
+      <dependencies>
+          <dependency>
+              <groupId>com.jnh</groupId>
+              <artifactId>core</artifactId>
+              <version>1.0.0-SNAPSHOT</version>
+          </dependency>
+      </dependencies>
+  </dependencyManagement>
 </project>
