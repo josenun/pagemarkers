@@ -41,7 +41,7 @@ public class ProviderController extends BaseController {
     public void createPagemarker(@PathVariable String provider,
             @RequestBody String body, HttpServletRequest request,
             HttpServletResponse response) {
-
+        LOGGER.debug("create Pagemarker");
         // CardInstance bodyRequest = checkBody(body, CardInstance.class);
         StringBuffer root = request.getRequestURL();
         String rootStr = root != null ? root.toString() : "";
