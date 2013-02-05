@@ -1,6 +1,5 @@
 package com.jnh.pagemarkers.api.exceptions;
 
-import java.io.IOException;
 
 /**
  * @author José Núñez Herrero
@@ -17,7 +16,7 @@ public class ParameterNotFoundException extends Exception {
      * @param parameterName
      */
     public ParameterNotFoundException(String parameterName) {
-        // TODO Auto-generated constructor stub
+        super("Parameter not found '" + parameterName + "'.");
     }
 
     /**
@@ -26,8 +25,8 @@ public class ParameterNotFoundException extends Exception {
      * @param parameterName
      * @param e
      */
-    public ParameterNotFoundException(String parameterName, IOException e) {
-        // TODO Auto-generated constructor stub
+    public ParameterNotFoundException(String parameterName, Exception e) {
+        super("Parameter not found '" + parameterName + "'.", e);
     }
 
 }
