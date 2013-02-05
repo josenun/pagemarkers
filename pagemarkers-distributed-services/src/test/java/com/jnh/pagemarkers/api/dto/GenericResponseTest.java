@@ -43,7 +43,7 @@ public class GenericResponseTest extends AbstractPojoTester {
         GenericResponse genericResponse = new GenericResponse("Identifier",
                 "Category", "Description", "Details");
         Assert.assertEquals(
-                "GenericResponse [id=Identifier, category=Category, description=Description, details=Details",
+                "GenericResponse [id=Identifier, category=Category, description=Description, details=Details]",
                 genericResponse.toString());
     }
 
